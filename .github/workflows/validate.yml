@@ -1,0 +1,24 @@
+name: validate lobbies
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python tools/validate.py
+      - name: generated files are not hand-edited
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          changed=$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD -- allowlist.json lobby.schema.json docs tools .github || true)
+          if [ -n "$changed" ] && [ "${{ github.event.pull_request.author_association }}" != "OWNER" ]; then
+            echo "These files are generated from farmbot's source and can't be changed in a lobby PR:"
+            echo "$changed"
+            exit 1
+          fi

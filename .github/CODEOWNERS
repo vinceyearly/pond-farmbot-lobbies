@@ -1,0 +1,7 @@
+# Every change needs the owner's review; the rules files doubly so.
+*                    @vinceyearly
+/allowlist.json      @vinceyearly
+/lobby.schema.json   @vinceyearly
+/docs/               @vinceyearly
+/tools/              @vinceyearly
+/.github/            @vinceyearly

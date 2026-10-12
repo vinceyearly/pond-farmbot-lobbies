@@ -1,0 +1,17 @@
+{
+  "$schema": "../../lobby.schema.json",
+  "name": "Terrible Ideas Night",
+  "author": "farmbot",
+  "description": "Every other round is a cursed kit. Spawn-killers get it back.",
+  "base": "ffa",
+  "settings": {
+    "TerribleIdeaChance": 50,
+    "TerribleIdeaMinPlayers": 2,
+    "SpawnKillPenaltyEnabled": true,
+    "SpawnKillGraceSeconds": 0.5,
+    "RoundsToWin": 10,
+    "EnableSuddenDeath": true,
+    "SuddenDeathSeconds": 40
+  },
+  "maps": []
+}

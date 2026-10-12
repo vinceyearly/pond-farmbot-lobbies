@@ -1,0 +1,381 @@
+{
+  "$comment": "Source of truth for which HostConfig settings a community lobby may change. Owner-maintained in DGHostBot; tools/lobby/gen.py publishes it (plus settings.md and lobby.schema.json) to the public pond-farmbot-lobbies repo. The host enforces the same list when it loads a lobby - it never trusts the repo.",
+  "forced": {
+    "$comment": "Applied to every community lobby, whatever the lobby file says.",
+    "EnableFfaRating": false,
+    "Is1v1Server": false,
+    "DevPassword": false,
+    "EnableModeSwitch": true,
+    "EnableStreaming": false,
+    "BluesEarnPercent": 50
+  },
+  "categories": [
+    {
+      "name": "Match",
+      "settings": {
+        "RoundsToWin": {
+          "type": "int",
+          "min": 3,
+          "max": 50,
+          "about": "Rounds a duck must win to take the match."
+        },
+        "RoundsPerIntermission": {
+          "type": "int",
+          "min": 1,
+          "max": 30,
+          "about": "Rounds between scoreboard breaks."
+        },
+        "MatchStartSeconds": {
+          "type": "int",
+          "min": 15,
+          "max": 300,
+          "about": "Lobby countdown once enough ducks are in."
+        },
+        "MinimumPlayers": {
+          "type": "int",
+          "min": 2,
+          "max": 8,
+          "about": "Ducks needed before a match starts."
+        },
+        "MaximumPlayers": {
+          "type": "int",
+          "min": 2,
+          "max": 24,
+          "about": "Lobby size cap. Over 8 needs base \"24p\"."
+        },
+        "WinByKills": {
+          "type": "bool",
+          "about": "Score by kills instead of rounds won."
+        },
+        "SkipExcessRounds": {
+          "type": "bool",
+          "about": "End the match early once the result is decided."
+        },
+        "MidGameJoining": {
+          "type": "bool",
+          "about": "Let ducks join during a match."
+        }
+      }
+    },
+    {
+      "name": "Lobby",
+      "settings": {
+        "LobbyName": {
+          "type": "string",
+          "maxLength": 32,
+          "about": "Name in the server browser. Duck Game colour tags like |DGGREEN| are allowed."
+        }
+      }
+    },
+    {
+      "name": "Maps",
+      "settings": {
+        "CustomMapsPercent": {
+          "type": "int",
+          "min": 0,
+          "max": 100,
+          "about": "Share of rounds on custom maps (your lobby's maps folder). The four map percentages must add up to 100."
+        },
+        "NormalMapsPercent": {
+          "type": "int",
+          "min": 0,
+          "max": 100,
+          "about": "Share of rounds on the game's built-in maps."
+        },
+        "RandomMapsPercent": {
+          "type": "int",
+          "min": 0,
+          "max": 100,
+          "about": "Share of rounds on randomly generated maps."
+        },
+        "InternetMapsPercent": {
+          "type": "int",
+          "min": 0,
+          "max": 100,
+          "about": "Share of rounds on maps downloaded from the workshop."
+        },
+        "MapScoresInRotation": {
+          "type": "bool",
+          "about": "Let skip votes and play counts push unpopular maps down the rotation."
+        }
+      }
+    },
+    {
+      "name": "Chaos",
+      "settings": {
+        "EnableTerribleIdeas": {
+          "type": "bool",
+          "about": "Some rounds hand every duck the same cursed kit."
+        },
+        "TerribleIdeaChance": {
+          "type": "int",
+          "min": 0,
+          "max": 100,
+          "about": "Percent of rounds that are a Terrible Idea."
+        },
+        "TerribleIdeaMinPlayers": {
+          "type": "int",
+          "min": 2,
+          "max": 8,
+          "about": "Ducks needed for a Terrible Idea round."
+        },
+        "EnableSuddenDeath": {
+          "type": "bool",
+          "about": "Long rounds turn into sudden death."
+        },
+        "SuddenDeathSeconds": {
+          "type": "int",
+          "min": 10,
+          "max": 120,
+          "about": "Seconds into a round before sudden death."
+        },
+        "EnableCarePackages": {
+          "type": "bool",
+          "about": "Supply drops land mid-round."
+        },
+        "CarePackageMinSeconds": {
+          "type": "int",
+          "min": 5,
+          "max": 120,
+          "about": "Earliest a care package can drop."
+        },
+        "CarePackageMaxSeconds": {
+          "type": "int",
+          "min": 5,
+          "max": 120,
+          "about": "Latest a care package can drop."
+        },
+        "CarePackageMinAlive": {
+          "type": "int",
+          "min": 2,
+          "max": 8,
+          "about": "Ducks alive needed for a drop."
+        }
+      }
+    },
+    {
+      "name": "Fairness",
+      "settings": {
+        "SpawnKillPenaltyEnabled": {
+          "type": "bool",
+          "about": "RICOCHET: a kill right after GO kills the killer too."
+        },
+        "SpawnKillGraceSeconds": {
+          "type": "double",
+          "min": 0,
+          "max": 2,
+          "about": "How soon after GO a kill counts as a spawn-kill."
+        },
+        "EnableKonamiPenalty": {
+          "type": "bool",
+          "about": "Penalise the Konami-code cheat input."
+        },
+        "KonamiScorePenalty": {
+          "type": "int",
+          "min": 0,
+          "max": 5,
+          "about": "Points lost for it."
+        },
+        "TrickShotPointBonus": {
+          "type": "int",
+          "min": 0,
+          "max": 10,
+          "about": "Extra points for trick shots."
+        },
+        "EnableAfkKick": {
+          "type": "bool",
+          "about": "Kick (never ban) ducks that stand still round after round."
+        },
+        "AfkWarnRounds": {
+          "type": "int",
+          "min": 1,
+          "max": 10,
+          "about": "Idle rounds before the warning."
+        },
+        "AfkKickRounds": {
+          "type": "int",
+          "min": 2,
+          "max": 20,
+          "about": "Idle rounds before the kick."
+        },
+        "AfkKickMinSeconds": {
+          "type": "int",
+          "min": 30,
+          "max": 600,
+          "about": "And at least this long idle."
+        },
+        "LagLimitMs": {
+          "type": "int",
+          "min": 250,
+          "max": 500,
+          "about": "Ping where the lag monitor starts warning."
+        },
+        "EnableTeamArmorBalance": {
+          "type": "bool",
+          "about": "Teams: armour for the short-handed side."
+        },
+        "SkipVotePercent": {
+          "type": "int",
+          "min": 30,
+          "max": 90,
+          "about": "Share of the room a skip/restart vote needs."
+        },
+        "KickVotePercent": {
+          "type": "int",
+          "min": 50,
+          "max": 90,
+          "about": "Share of the room a kick vote needs."
+        }
+      }
+    },
+    {
+      "name": "Shop and loadouts",
+      "$comment": "Prices only take blues out of the economy, so they are safe to change. Floors stop a lobby from making power items nearly free.",
+      "settings": {
+        "EnableItemShop": {
+          "type": "bool",
+          "about": "@buy spawns an item next to you mid-round."
+        },
+        "BuyCooldownSeconds": {
+          "type": "int",
+          "min": 0,
+          "max": 300,
+          "about": "Seconds between @buy purchases."
+        },
+        "BuyPriceOverrides": {
+          "type": "priceMap",
+          "min": 50,
+          "max": 20000,
+          "about": "Item name -> price for @buy."
+        },
+        "EnableLoadouts": {
+          "type": "bool",
+          "about": "@l1-@l5, @l make and @l0."
+        },
+        "LoadoutPriceOverrides": {
+          "type": "priceMap",
+          "min": 50,
+          "max": 20000,
+          "about": "Item name -> price inside a loadout."
+        },
+        "EquipmentPriceOverrides": {
+          "type": "priceMap",
+          "min": 50,
+          "max": 20000,
+          "about": "Armour/holster name -> price."
+        },
+        "LoadoutTapePremium": {
+          "type": "int",
+          "min": 0,
+          "max": 2000,
+          "about": "What taping two items together costs."
+        },
+        "LoadoutHolsterPrice": {
+          "type": "int",
+          "min": 50,
+          "max": 5000,
+          "about": "Holster price."
+        },
+        "LoadoutPowerHolsterPrice": {
+          "type": "int",
+          "min": 50,
+          "max": 5000,
+          "about": "Power holster price."
+        },
+        "ExtraAmmoPercent": {
+          "type": "int",
+          "min": 0,
+          "max": 500,
+          "about": "Extra-ammo upgrade, % of the item price."
+        },
+        "InfiniteAmmoPercent": {
+          "type": "int",
+          "min": 50,
+          "max": 1000,
+          "about": "Infinite-ammo upgrade, % of the item price."
+        },
+        "LoadoutDelaySeconds": {
+          "type": "int",
+          "min": 0,
+          "max": 30,
+          "about": "Seconds after GO before loadouts can be bought."
+        }
+      }
+    },
+    {
+      "name": "Betting",
+      "settings": {
+        "EnableRoundBetting": {
+          "type": "bool",
+          "about": "Dead ducks bet on the final two."
+        },
+        "BettingMinBet": {
+          "type": "int",
+          "min": 10,
+          "max": 500,
+          "about": "Smallest bet."
+        },
+        "BettingMaxBet": {
+          "type": "int",
+          "min": 10,
+          "max": 500,
+          "about": "Largest bet."
+        },
+        "EnableHouseBets": {
+          "type": "bool",
+          "about": "Farmbot offers priced bets of his own."
+        },
+        "HouseBetWindowSeconds": {
+          "type": "int",
+          "min": 15,
+          "max": 60,
+          "about": "How long a bet offer stays open."
+        }
+      }
+    },
+    {
+      "name": "Farmbot",
+      "settings": {
+        "ChatBudgetMatchPerMinute": {
+          "type": "int",
+          "min": 0,
+          "max": 10,
+          "about": "Non-essential farmbot lines a minute during a round."
+        },
+        "ChatBudgetLobbyPerMinute": {
+          "type": "int",
+          "min": 0,
+          "max": 10,
+          "about": "...in the lobby."
+        },
+        "ChatBudgetIntermissionPerMinute": {
+          "type": "int",
+          "min": 0,
+          "max": 12,
+          "about": "...at the scoreboard."
+        },
+        "MaxKillCommentaryPerMatch": {
+          "type": "int",
+          "min": 0,
+          "max": 6,
+          "about": "AI kill callouts per match."
+        },
+        "EnableStoryLedger": {
+          "type": "bool",
+          "about": "Running rivalries and story recaps."
+        },
+        "EnableBookOfFrames": {
+          "type": "bool",
+          "about": "Tech callouts and @tech answers."
+        }
+      }
+    }
+  ],
+  "locked": [
+    "Credentials and links: webhooks, YouTube keys, DevPassword, script paths.",
+    "What kind of server it is: Is1v1Server, stats reporting, Discord posting, streaming.",
+    "Anything that creates blues: challenge rewards, daily streaks, bounty payouts, tips, the guest tab, weekly payouts, give caps.",
+    "Ratings: community lobbies are always unrated.",
+    "Host plumbing: logging, keepalive, lobby watcher, restart rules, mode-switch rules."
+  ]
+}
